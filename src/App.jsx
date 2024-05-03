@@ -1,15 +1,20 @@
 import './App.css'
 import './index.css'
-
 import axios from 'axios'
 import { useState } from 'react';
 import Loader from './Loader';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [showLoader, setShowLoader] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const command = 'Summarize the given text into 50-100 words depending on length of text. For example if text contains less than 250 words then summarize it in 50-55 words and if text contains more then 1000 words then summarize it in 2 paragraphs and in 90-100 words and so on'
 
   async function generateAnswer() {
     // setAnswer("Loading...");
@@ -20,42 +25,53 @@ function App() {
       data : {
         "contents":[
           {
-            "parts":[{"text":question + '\n Summarize the given text into 50-150 words depending on length of text.'}]
+            "parts":[{"text":question +'\n'+ command }]
           }
         ]
       }
     })
 
-    
-
     console.log(response['data']['candidates'][0]['content']['parts'][0]['text'])
     setAnswer(response['data']['candidates'][0]['content']['parts'][0]['text']);
     setShowLoader(false)
+    setCopied(true);
+  }
 
+  const notify = () => {
+    toast('Content is Copied')
   }
 
   return (
     <div className=' text-white w-[760px] h-[500px] font-mono '>
 
-      <div className='h-8 w-[800px] bg-black text-center flex justify-center items-center'>
+      <div className='h-8 w-[760px] bg-black text-center flex justify-center items-center'>
         <h2 className='text-lg'>Text Summarizer</h2>
       </div>
 
       <div className=' text-center text-xs text-black'>
         
-        <textarea onChange={ (e) => setQuestion(e.target.value) } value={question} name="" id="" cols="90" rows="10" className='my-3 border-2 border-black rounded-sm text-xs'></textarea> <br />
+        <textarea onChange={ (e) => setQuestion(e.target.value) } value={question} name="" id="" cols="90" rows="10" className='my-3 px-2 text-justify border-2 border-black rounded-sm text-xs'></textarea> <br />
         {/* <input type="text" className='px-1 h-16 w-72 border-2 border-black rounded-sm ' onChange={ (e) => setQuestion(e.target.value) } /> <br /> */}
 
-        <button className='h-10 w-36 bg-white border-2 border-black rounded-md' onClick={generateAnswer} >S</button>
+        <button className='h-10 w-36 bg-white border-2 border-black rounded-md' onClick={generateAnswer} >Summarize</button>
         {
           showLoader ? (
             <Loader/>
           ) : (
-            <pre className='flex text-wrap text-justify px-2  '>{answer}</pre>
+            <pre className='flex text-wrap text-justify px-3 py-3 '>{answer}</pre>
           )
         }
-      </div>
 
+        
+        
+        {copied ? 
+          <CopyToClipboard text={answer} onCopy={ () => toast('Content is copied') }>
+          <button className='h-8 w-36  border-2 border-black rounded-md bg-fuchsia-200 hover:bg-fuchsia-600'>Copy to clipboard</button>
+          </CopyToClipboard>
+        : null 
+        }
+
+      </div>
     </div>
   )
 }

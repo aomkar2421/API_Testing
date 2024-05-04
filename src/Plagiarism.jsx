@@ -8,14 +8,14 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './Navbar';
 
-function Grammar() {
+function Plaiarism() {
 
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [showLoader, setShowLoader] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const command = 'This sentence is encountering '
+  const command = 'This sentence is encountering Plagiarism, please can you modify or restructure it so that plagiarism can be avoided.'
 
   async function generateAnswer() {
     // setAnswer("Loading...");
@@ -49,7 +49,7 @@ function Grammar() {
         <textarea onChange={ (e) => setQuestion(e.target.value) } value={question} name="" id="" cols="55" rows="7" className='my-3 px-2 text-justify border-2 border-black rounded-sm text-xl'></textarea> <br />
         {/* <input type="text" className='px-1 h-16 w-72 border-2 border-black rounded-sm ' onChange={ (e) => setQuestion(e.target.value) } /> <br /> */}
 
-        <button className='h-10 w-36 bg-white border-2 border-black rounded-md' onClick={generateAnswer} >Check Grammer</button>
+        <button className='h-10 w-44 bg-white border-2 border-black rounded-md' onClick={generateAnswer} >Plagiarsim Remover</button>
         {
           showLoader ? (
             <Loader/>
@@ -72,4 +72,4 @@ function Grammar() {
   )
 }
 
-export default Grammar
+export default Plaiarism

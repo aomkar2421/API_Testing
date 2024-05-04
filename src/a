@@ -1,0 +1,46 @@
+// import './App.css'
+// import {
+//   createBrowserRouter,
+//   RouterProvider,
+// } from "react-router-dom";
+// import Home from './Home';
+// import Summerizer from './Summerizer';
+// import Grammar from './Grammar';
+// import Plagiarism from './Plagiarism';
+
+
+// function App() {
+
+//   const router = createBrowserRouter([
+//     {
+//       path: "/",
+//       element: <Home/>,
+//     },
+//     {
+//       path: "/summerizer",
+//       element: <Summerizer/>,
+//     },
+//     {
+//       path: "/grammar",
+//       element: <Grammar/>,
+//     },
+//     {
+//       path: "/plagiarism",
+//       element: <Plagiarism/>,
+//     },
+    // {
+    //   path: "/home",
+    //   element: <Home/>,
+    // },
+//   ]);
+
+//   return (
+//     <>
+//       <RouterProvider router={router} />
+//       <h1>Dummy</h1>
+//       <h3>dbkadsjk</h3>
+//     </>
+//   )
+// }
+
+// export default App
